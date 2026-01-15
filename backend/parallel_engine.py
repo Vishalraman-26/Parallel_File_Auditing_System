@@ -1,5 +1,4 @@
-from concurrent.futures import ProcessPoolExecutor, as_completed
-from multiprocessing import cpu_count
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List
 
 from file_chunker import chunk_file_by_lines
@@ -10,17 +9,16 @@ def scan_file_parallel(
     file_path: str,
     categories: List[str],
     chunk_size_lines: int = 5000,
-    max_workers: int | None = None,
+    max_workers: int = 4,   # cloud safe
 ) -> List[MatchRecord]:
     """
-    Scan a file using multiprocessing across chunks of lines.
+    Scan a file using multithreading across chunks of lines.
+    This is MUCH faster and stable on cloud platforms.
     """
-    if max_workers is None:
-        max_workers = max(cpu_count() - 1, 1)
 
     all_matches: List[MatchRecord] = []
 
-    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = []
 
         for chunk_index, lines, start_line in chunk_file_by_lines(
@@ -35,4 +33,3 @@ def scan_file_parallel(
             all_matches.extend(chunk_matches)
 
     return all_matches
-
