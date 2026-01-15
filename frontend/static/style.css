@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: transparent;   /* ✅ IMPORTANT */
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND CANVAS */
+
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100;
+  pointer-events: none;
+  background: radial-gradient(circle at top, #020617, #020617, #000); /* keeps your look */
+}
+
+/* FORCE UI ABOVE BG */
+
+.container, .topbar, .card, button, input, label {
+  position: relative;
+  z-index: 10;
+}
+
+/* HEADER */
+
+.topbar {
+  text-align: center;
+  padding: 28px 10px 10px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.topbar p {
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* LAYOUT */
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* GLASS CARD */
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 26px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 30px 80px rgba(0,0,0,0.6);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+/* UPLOAD PANEL */
+.upload-panel {
+  margin-top: 20px;
+  padding: 36px !important;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+}
+
+.upload-left h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: block;
+  margin-bottom: 20px;
+  transform: scale(1.05);
+  transform-origin: left;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 24px;
+  margin: 20px 0 26px;
+}
+
+.checkbox-group label {
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.checkbox-group input {
+  transform: scale(1.2);
+  margin-right: 6px;
+}
+
+/* BUTTON */
+
+.scan-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  padding: 16px 42px;
+  font-size: 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(34,197,94,0.5);
+}
+
+.scan-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+}
+
+.scan-btn:hover::before {
+  animation: shine 1s ease;
+}
+
+@keyframes shine {
+  to { transform: translateX(100%); }
+}
+
+/* RIGHT PANEL */
+
+.upload-right {
+  background: rgba(255,255,255,0.03);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.progress-status {
+  margin-bottom: 10px;
+}
+
+/* PROGRESS BAR */
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px 0 16px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  transition: width 0.4s ease;
+}
+
+/* STAGES */
+
+.stage-list {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.stage-list li {
+  margin-bottom: 10px;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.stage-list li.active {
+  opacity: 1;
+  color: #86efac;
+}
+
+/* STATS */
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.stats-row-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+}
+
+.stat-box {
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.6);
+  transition: all 0.25s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-4px);
+}
+
+.stat-box h3 {
+  margin: 6px 0 0;
+  font-size: 1.8rem;
+  text-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+
+/* CHARTS */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+/* MISC */
+
+.hidden { display: none; }
+.loading { color: #22c55e; }
+.error { color: #f87171; }
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+}
+.charts-grid {
+  align-items: stretch;
+}
+
+.charts-grid .card {        /* 👈 both cards same height */
+  display: flex;
+  flex-direction: column;
+}
+
+.charts-grid .card canvas {
+  flex: 1;                     /* 👈 canvas fills card equally */
+  max-height: 330px;           /* 👈 prevents pie from becoming huge */
+}
+/* Make bar chart card taller */
+#barChart {
+  max-height: none !important;
+}
+
+/* Only bar chart card taller */
+.charts-grid .card:first-child {
+  height: 450px;   /* 👈 taller bar chart */
+}
+
+/* Keep pie chart same size */
+.charts-grid .card:last-child {
+  height: 470px;   /* 👈 unchanged */
+}
+/* Download button area under progress bar */
+.download-area {
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* Download CSV button wrapper */
+.download-wrapper {
+  margin-top: 16px;
+  text-align: left;   /* 👈 align with Start Scan */
+}
+
+/* Smaller, secondary button */
+.download-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  padding: 10px 20px;     /* 👈 smaller */
+  font-size: 0.95rem;     /* 👈 smaller text */
+  border-radius: 999px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(34,197,94,0.4);
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(34,197,94,0.6);
+}
+
+/* Hidden animation */
+#downloadBtn.hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+.report-ready {
+  margin: 22px 0 14px 12px;   /* 👈 spacing + slight right shift */
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #4ade80;
+  text-align: left;
+  animation: reportBlink 1s infinite;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.8);
+}
+
+/* Blink animation */
+@keyframes reportBlink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.1; }
+  100% { opacity: 1; }
+}
+/* Hidden state */
+.report-ready.hidden {
+  display: none;
+}
+/* Row that holds text + button */
+.report-row {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;            /* space between text and button */
+}
+
+/* Hidden state */
+.report-row.hidden {
+  display: none;
+}
+
+/* Blinking text */
+.report-ready-inline {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #4ade80;
+  animation: reportBlink 1s infinite;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.8);
+}
+
+/* Blink animation */
+@keyframes reportBlink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.15; }
+  100% { opacity: 1; }
+}
+
+/* Inline download button (smaller, neat) */
+.download-btn-inline {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(34,197,94,0.4);
+  transition: all 0.25s ease;
+}
+
+.download-btn-inline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(34,197,94,0.6);
+}

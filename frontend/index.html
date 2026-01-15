@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parallel File Auditing Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="topbar">
+  <h1>🔍 Parallel File Auditing System</h1>
+  <p>High-performance compliance & security scanning engine</p>
+</div>
+
+<div class="container">
+
+  <!-- UPLOAD PANEL -->
+  <div class="card upload-panel">
+    <div class="upload-grid">
+
+      <div class="upload-left">
+        <h2>📂 Upload & Scan</h2>
+        <input type="file" id="fileInput" class="file-input">
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="scanSensitive" checked> Sensitive</label>
+          <label><input type="checkbox" id="scanForbidden" checked> Forbidden</label>
+          <label><input type="checkbox" id="scanPolicy" checked> Policy</label>
+        </div>
+
+        <button id="startScanBtn" class="scan-btn">🚀 Start Scan</button>
+
+        <div id="reportRow" class="report-row hidden">
+          <span id="reportReadyHint" class="report-ready-inline">
+            ✨ Report is ready 👉
+          </span>
+
+          <button id="downloadBtn" class="download-btn-inline" onclick="downloadCSV()">
+            📄 Download CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="upload-right">
+        <h3>⚡ Scan Progress</h3>
+
+        <div class="progress-status">
+          Status: <span id="scanStatus">Idle</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <ul class="stage-list">
+          <li id="stage1">📄 Reading file</li>
+          <li id="stage2">🧠 Running sequential scan</li>
+          <li id="stage3">⚡ Running parallel scan</li>
+          <li id="stage4">📊 Generating report</li>
+        </ul>
+
+        <div class="progress-hint">
+          ⏳ This panel shows the scanning stages in real time.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box"><span>Sensitive</span><h3 id="sensitiveCount">-</h3></div>
+    <div class="stat-box"><span>Forbidden</span><h3 id="forbiddenCount">-</h3></div>
+    <div class="stat-box"><span>Policy</span><h3 id="policyCount">-</h3></div>
+    <div class="stat-box"><span>Total</span><h3 id="totalIssues">-</h3></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-grid">
+
+    <div class="card">
+      <h2>📊 Issues by Category</h2>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>🧩 Distribution</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="stats-row stats-row-2">
+    <div class="stat-box"><span>Sequential (s)</span><h3 id="sequentialTime">-</h3></div>
+    <div class="stat-box"><span>Parallel (s)</span><h3 id="parallelTime">-</h3></div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='bg.js') }}"></script>
+
+</body>
+</html>
