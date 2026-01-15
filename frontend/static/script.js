@@ -1,4 +1,4 @@
-const API_BASE = "https://file-audit-backend.onrender.com";
+const API_BASE = "https://parallel-file-auditing-system-2.onrender.com";
 
 let barChart = null;
 let pieChart = null;
