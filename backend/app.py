@@ -12,11 +12,7 @@ from scanner import scan_file_sequential_with_progress
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-app = Flask(
-    __name__,
-    static_folder=os.path.join(BASE_DIR, "frontend", "static"),
-    template_folder=os.path.join(BASE_DIR, "frontend"),
-)
+app = Flask(__name__)
 CORS(app)
 # 🔥 GLOBAL STATE
 scan_state = {
@@ -31,7 +27,7 @@ last_scan_matches = []
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return jsonify({"status": "Backend is running"})
 
 
 def _get_selected_categories(form_data):
